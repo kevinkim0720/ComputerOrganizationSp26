@@ -1,4 +1,4 @@
-# Program Name: printQuotedStr.s
+# Program Name: PrintQuotedStr.s
 # Author: Kevin Kim
 # Date: 2/12/2026
 # Purpose: get user input string and put quotes around it

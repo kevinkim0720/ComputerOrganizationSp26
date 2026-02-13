@@ -1,4 +1,4 @@
-# Program Name: printAge.s
+# Program Name: PrintAge.s
 # Author: Kevin Kim
 # Date: 2/12/2026
 # Purpose: Asks user input of his/her age then printf
