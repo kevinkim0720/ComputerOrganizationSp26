@@ -1,6 +1,6 @@
 # Program Name: PrintStrTab.s
 # Author: Kevin Kim
-# Date: 2/23/2026
+# Date: 2/13/2026
 # Purpose: format string with tabs between a number and text
 .text
 .global main
