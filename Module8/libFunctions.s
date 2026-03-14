@@ -8,7 +8,8 @@ InchesToFt:
 	#Push stack
 	SUB sp, sp, #4
 	STR lr, [sp]
-
+	
+	#Just to get feet
 	MOV r1, #12
 	BL __aeabi_idiv
 
@@ -30,7 +31,7 @@ kph:
 	# r0 input is hours and r1 input is miles
 	MOV r4, r0
 	MOV r0, r1
-
+	# Use the existing function
 	BL miles2kilometer
 	MOV r1, r4
 	BL __aeabi_idiv

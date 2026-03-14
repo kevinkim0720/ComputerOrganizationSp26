@@ -4,6 +4,7 @@ main:
 	SUB sp, sp, #4
 	STR lr, [sp, #0]
 
+	# miles2kilometer program
 	LDR r0, =promptMiles
 	BL printf
 
@@ -19,7 +20,7 @@ main:
 	LDR r0, =printKm
 	BL printf
 
-
+	# Kilometers per hour program
 	LDR r0, =promptMiles
 	BL printf
 	
@@ -45,7 +46,7 @@ main:
 	LDR r0, =printKph
 	BL printf
 
-
+	# Celsius to Fahrenheit program
 	LDR r0, =promptC
 	BL printf
 
@@ -61,7 +62,7 @@ main:
 	LDR r0, =printF
 	BL printf
 
-
+	#Inches to Ft program
 	LDR r0, =promptInches
 	BL printf
 
