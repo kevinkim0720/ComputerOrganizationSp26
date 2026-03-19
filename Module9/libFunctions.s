@@ -39,18 +39,52 @@ Grade:
 	MOV r1, #0
 	CMP r4, #100
 	ADDLE r1, r1, #1
-	OR r0, r0, r1
+	AND r0, r0, r1  #score is between 0 and 100
 
-	CMP r1, #1
+	CMP r0, #1
 	BNE ErrorMsg
-		# Grade is valid
-		CMP r4, #90
-		BGE elsif_1:
-			LDR r0, =grade_A
-			BL printf
+	
+	CMP r4, #90
+	BGE gradeA
+
+	CMP r4, #80
+	BGE gradeB
+
+	CMP r4, #70
+	BGE gradeC
+	
+	CMP r4, #60
+	BGE gradeD
+
+	B gradeF
+
+	gradeA:
+		LDR r0, =grade_A
+		BL printf
+		B EndError
+
+	gradeB:
+		LDR r0, =grade_B
+		BL printf
+		B EndError
+
+	gradeC:
+		LDR r0, =grade_C
+		BL printf
+		B EndError
+
+	gradeD:
+		LDR r0, =grade_D
+		BL printf
+		B EndError
+
+	gradeF:
+		LDR r0, =grade_F
+		BL printf
+		B EndError
 			
 	ErrorMsg:
-		"Print if grade is invalid"
+		# Print if grade is invalid
 		LDR r0, =error
 		BL printf
 	EndError
@@ -60,7 +94,7 @@ Grade:
 	ADD sp, sp, #8
 	MOV pc, lr
 .data
-	error: .asciz ""
+	error: .asciz "Invalid score"
 	grade_A: .asciz "\nGrade is A"
 	grade_B: .asciz "\nGrade is B"
 	grade_C: .asciz "\nGrade is C"
