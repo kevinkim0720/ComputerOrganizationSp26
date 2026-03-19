@@ -1,5 +1,5 @@
 All: main
-LIB: libFunctions.o
+LIB=libFunctions.o
 CC=gcc
 
 main: main.o $(LIB)

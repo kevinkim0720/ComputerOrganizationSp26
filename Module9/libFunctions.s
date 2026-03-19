@@ -39,7 +39,7 @@ Grade:
 	MOV r1, #0
 	CMP r4, #100
 	ADDLE r1, r1, #1
-	AND r0, r0, r1  #score is between 0 and 100
+	AND r0, r0, r1
 
 	CMP r0, #1
 	BNE ErrorMsg
@@ -87,18 +87,18 @@ Grade:
 		# Print if grade is invalid
 		LDR r0, =error
 		BL printf
-	EndError
 
-	LDR lr, [sp]
-	LDR r4, [sp, #4]
-	ADD sp, sp, #8
-	MOV pc, lr
+	EndError:
+		LDR lr, [sp]
+		LDR r4, [sp, #4]
+		ADD sp, sp, #8
+		MOV pc, lr
 .data
-	error: .asciz "Invalid score"
-	grade_A: .asciz "\nGrade is A"
-	grade_B: .asciz "\nGrade is B"
-	grade_C: .asciz "\nGrade is C"
-	grade_D: .asciz "\nGrade is D"
-	grade_F: .asciz "\nGrade is F"
+	error: .asciz "Invalid score\n"
+	grade_A: .asciz "Grade is A\n"
+	grade_B: .asciz "Grade is B\n"
+	grade_C: .asciz "Grade is C\n"
+	grade_D: .asciz "Grade is D\n"
+	grade_F: .asciz "Grade is F\n"
 
 #END Grade
