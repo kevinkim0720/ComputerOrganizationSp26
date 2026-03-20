@@ -5,8 +5,54 @@
 
 .text
 ChkAlphaLOG:
+	SUB sp, sp, #8
+	STR lr, [sp]
+	STR r4, [sp, #4]
+
+	MOV r4, r0
+
+	#Comparing with uppercase letters
+	MOV r0, #0
+	CMP r4, #'A'
+	ADDGE r0, r0, #1
+	MOV r1, #0
+	CMP r4, #'Z'
+	ADDLE r1, r1, #1
+	AND r2, r0, r1
+
+	#Comparing with lowercase letters
+	MOV r0, #0
+	CMP r4, #'a'
+	ADDGE r0, r0, #1
+	MOV r1, #0
+	CMP r4, #'z'
+	ADDLE r1, r1, #1
+	AND r3, r0, r1
+
+	#If either 'and' returns 1 then the character is alphabetic
+	ORR r0, r2, r3
+
+	CMP r0, #1
+	BEQ printY
+
+	printN:
+		LDR r0, =n_msg
+		BL printf
+		B done
+
+	printY:
+		LDR r0, =y_msg
+		BL printf
+
+	done:
+		LDR lr, [sp]
+		LDR r4, [sp, #4]
+		ADD sp, sp, #8
+		MOV pc, lr
 
 .data
+	y_msg: .asciz "Y\n"
+	n_msg: .asciz "N\n"
 
 #END ChkAlphaLOG
 

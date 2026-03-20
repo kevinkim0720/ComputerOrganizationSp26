@@ -4,6 +4,18 @@ main:
 	SUB sp, sp, #4
 	STR lr, [sp, #0]
 
+	#LOG program
+	LDR r0, =promptLOG
+	BL printf
+
+	LDR r0, =inputChar
+	LDR r1, = inchar
+	BL scanf
+
+	LDR r0, =inchar
+	LDRB r0, [r0]
+	BL ChkAlphaLOG
+		
 
 	#Grade program
 
@@ -45,8 +57,8 @@ main:
 	MOV pc, lr
 
 .data
-promptLOG: .asciz "Input something and I'll tell you if it's alphabetic using logical operations: "
-promptNOLOG: .asciz "Input something and I'll tell you if it's alphabetic not using logical operations: "
+promptLOG: .asciz "Input a character and I'll tell you if it's alphabetic using logical operations: "
+promptNOLOG: .asciz "Input a character and I'll tell you if it's alphabetic not using logical operations: "
 promptMax: .asciz "Input 3 values: "
 promptStudent: .asciz "Input student name: "
 promptGrade: .asciz "Enter a score between 0-100: "
@@ -54,9 +66,11 @@ promptGrade: .asciz "Enter a score between 0-100: "
 
 printGrade: .asciz "%s got grade letter %s\n"
 
+inputChar: .asciz " %c"
 inputStr: .asciz "%s"
 inputInt: .asciz "%d"
 
+inchar: .byte 0
 student: .space 40
 grade: .word 0
 
