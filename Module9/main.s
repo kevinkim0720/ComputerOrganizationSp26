@@ -15,10 +15,21 @@ main:
 	LDR r0, =inchar
 	LDRB r0, [r0]
 	BL ChkAlphaLOG
+
+	#NOLOG program
+	LDR r0, =promptNOLOG
+	BL printf
+
+	LDR r0, =inputChar
+	LDR r1, =inchar
+	BL scanf
+
+	LDR r0, =inchar
+	LDRB r0, [r0]
+	BL ChkAlphaNOLOG
 		
 
 	#Grade program
-
 	LDR r0, =promptStudent
 	BL printf
 
@@ -62,7 +73,6 @@ promptNOLOG: .asciz "Input a character and I'll tell you if it's alphabetic not 
 promptMax: .asciz "Input 3 values: "
 promptStudent: .asciz "Input student name: "
 promptGrade: .asciz "Enter a score between 0-100: "
-
 
 printGrade: .asciz "%s got grade letter %s\n"
 

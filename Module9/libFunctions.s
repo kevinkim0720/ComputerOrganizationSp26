@@ -58,8 +58,35 @@ ChkAlphaLOG:
 
 .text
 ChkAlphaNOLOG:
+	SUB sp, sp, #4
+	STR lr, [sp]
+
+	CMP r0, #'A'
+	BLT chkLower
+	CMP r0, #'Z'
+	BLE isAlpha
+
+	chkLower:
+		CMP r0, #'a'
+		BLT notAlpha
+		CMP r0, #'z'
+		BLE isAlpha
+	notAlpha:
+		LDR r0, =msgN
+		BL printf
+		B complete
+	isAlpha:
+		LDR r0, =msgY
+		BL printf
+
+	complete:
+		LDR lr, [sp]
+		ADD sp, sp, #4
+		MOV pc, lr
 
 .data
+	msgY: .asciz "Y\n"
+	msgN: .asciz "N\n"
 
 #END ChkAlphaNOLOG
 
