@@ -83,7 +83,17 @@ ChkAlphaNOLOG:
 #END ChkAlphaNOLOG
 
 findMAXOf3:
-
+	SUB sp, sp, #4
+	STR lr, [sp]
+	
+	CMP r1, r0
+	MOVGT r0, r1
+	CMP r2, r0
+	MOVGT r0, r2
+	
+	LDR lr, [sp]
+	ADD sp, sp, #4
+	MOV pc, lr
 
 #END findMAXOf3
 

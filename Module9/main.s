@@ -27,7 +27,28 @@ main:
 	LDR r0, =inchar
 	LDRB r0, [r0]
 	BL ChkAlphaNOLOG
-		
+	
+	#Max3program
+	LDR r0, =promptMax
+	BL printf
+
+	LDR r0, =input3Int
+	LDR r1, =val1
+	LDR r2, =val2
+	LDR r3, =val3
+	BL scanf
+
+	LDR r0, =val1
+	LDR r0, [r0]
+	LDR r1, =val2
+	LDR r1, [r1]
+	LDR r2, =val3
+	LDR r2, [r2]
+	BL findMAXOf3
+
+	MOV r1, r0
+	LDR r0, =printMax
+	BL printf
 
 	#Grade program
 	LDR r0, =promptStudent
@@ -74,13 +95,18 @@ promptMax: .asciz "Input 3 values: "
 promptStudent: .asciz "Input student name: "
 promptGrade: .asciz "Enter a score between 0-100: "
 
+printMax: .asciz "Max value is: %d\n"
 printGrade: .asciz "%s got grade letter %s\n"
 
 inputChar: .asciz " %c"
+input3Int: .asciz "%d %d %d"
 inputStr: .asciz "%s"
 inputInt: .asciz "%d"
 
 inchar: .byte 0
+val1: .word 0
+val2: .word 0
+val3: .word 0
 student: .space 40
 grade: .word 0
 
