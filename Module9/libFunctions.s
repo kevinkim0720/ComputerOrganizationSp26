@@ -38,25 +38,20 @@ ChkAlphaLOG:
 	printN:
 		LDR r0, =n_msg
 		BL printf
-		B done
+		B done_LOG
 
 	printY:
 		LDR r0, =y_msg
 		BL printf
 
-	done:
+	done_LOG:
 		LDR lr, [sp]
 		LDR r4, [sp, #4]
 		ADD sp, sp, #8
 		MOV pc, lr
 
-.data
-	y_msg: .asciz "Y\n"
-	n_msg: .asciz "N\n"
-
 #END ChkAlphaLOG
 
-.text
 ChkAlphaNOLOG:
 	SUB sp, sp, #4
 	STR lr, [sp]
@@ -72,32 +67,26 @@ ChkAlphaNOLOG:
 		CMP r0, #'z'
 		BLE isAlpha
 	notAlpha:
-		LDR r0, =msgN
+		LDR r0, =n_msg
 		BL printf
-		B complete
+		B done_NOLOG
 	isAlpha:
-		LDR r0, =msgY
+		LDR r0, =y_msg
 		BL printf
 
-	complete:
+	done_NOLOG:
 		LDR lr, [sp]
 		ADD sp, sp, #4
 		MOV pc, lr
 
-.data
-	msgY: .asciz "Y\n"
-	msgN: .asciz "N\n"
 
 #END ChkAlphaNOLOG
 
-.text
 findMAXOf3:
 
-.data
 
 #END findMAXOf3
 
-.text
 Grade:
 	SUB sp, sp, #8
 	STR lr, [sp]
@@ -135,35 +124,43 @@ Grade:
 
 	gradeA:
 		LDR r0, =grade_A
-		B EndError
+		B done_Grade
 
 	gradeB:
 		LDR r0, =grade_B
-		B EndError
+		B done_Grade
 
 	gradeC:
 		LDR r0, =grade_C
-		B EndError
+		B done_Grade
 
 	gradeD:
 		LDR r0, =grade_D
-		B EndError
+		B done_Grade
 
 	gradeF:
 		LDR r0, =grade_F
-		B EndError
+		B done_Grade
 			
 	ErrorMsg:
 		# Print if grade is invalid
 		LDR r0, =error
 		MOV r1, #1
 
-	EndError:
+	done_Grade:
 		LDR lr, [sp]
 		LDR r4, [sp, #4]
 		ADD sp, sp, #8
 		MOV pc, lr
+
+#END Grade
 .data
+.global y_msg
+.global n_msg
+
+	y_msg: .asciz "Y\n"
+	n_msg: .asciz "N\n"
+
 	error: .asciz "Invalid score\n"
 	grade_A: .asciz "A"
 	grade_B: .asciz "B"
@@ -171,4 +168,3 @@ Grade:
 	grade_D: .asciz "D"
 	grade_F: .asciz "F"
 
-#END Grade
