@@ -60,6 +60,12 @@ not_prime:
 	MOV r0, #0
 	BX lr
 
+calcTotient:
+	SUB r0, r0, #1
+	SUB r1, r1, #1
+	MUL r0, r0, r1
+	BX LR
+
 eCheck:
 	CMP r0, #1
 	BLE invalid

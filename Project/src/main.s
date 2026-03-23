@@ -6,10 +6,11 @@ main:
 		BL printf
 
 		LDR r0, =fmt
-		LDR r1, =p
+		LDR r1, =choice
 		BL scanf
 
-		LDR r0, [p]
+		LDR r1, =choice
+		LDR r0, [r1]
 		CMP r0, #1
 		BEQ generate_keys
 		B exit
@@ -32,23 +33,25 @@ main:
 		BL scanf
 
 		# Check p prime
-		LDR r0, [p]
+		LDR r1, =p
+		LDR r0, [r1]
 		BL primeCheck
 		CMP r0, #0
 		BEQ not_prime
 
 		# Check q prime
-		LDR r0, [q]
+		LDR r1, =q
+		LDR r0, [r1]
 		BL primeCheck
 		CMP r0, #0
 		BEQ not_prime
 
 		# Compute phi = (p-1)(q-1)
-		LDR r0, [p]
-		LDR r1, [q]
+		LDR r2, =p
+		LDR r3, =q
 		BL calcTotient
-		LDR r1, =phi
-		STR r0, [r1]
+		LDR r4, =phi
+		STR r0, [r4]
 
 		# Read e
 		LDR r0, =prompt_e
@@ -59,8 +62,9 @@ main:
 		BL scanf
 
 		# Check e
-		LDR r0, [e]
-		LDR r1, [phi]
+		LDR r2, =e
+		LDR r3, =phi
+		LDR r1, [r3]
 		BL eCheck
 		CMP r0, #0
 		BEQ invalid_e
@@ -84,7 +88,7 @@ main:
 		SWI 0
 
 .data
-menu: .asciz "\n1. Generate Keys\n2. Quit\nChoice: "
+menu: .asciz "Menu Options\n1. Generate Keys\n2. Quit\nChoice: "
 prompt_p: .asciz "Enter p (<50): "
 prompt_q: .asciz "Enter q (<50): "
 prompt_e: .asciz "Enter e: "
@@ -100,3 +104,4 @@ p: .skip 4
 q: .skip 4
 phi: .skip 4
 e: .skip 4
+choice: .skip 4

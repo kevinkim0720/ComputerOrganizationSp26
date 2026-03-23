@@ -1,18 +1,16 @@
-CC = arm-linux-gnueabi-gcc
-CFLAGS = -Wall -g
+all: main
 
-TARGET = rsa_program
+CC = gcc
+CFLAGS = -g
 
-SRCS = src/main.s src/rsa_lib.s
-OBJS = $(SRCS:.s=.o)
+SRC_DIR = src
+LIB = $(SRC_DIR)/rsa_lib.o
 
-all: $(TARGET)
+main: $(SRC_DIR)/main.o $(LIB)
+	$(CC) $(SRC_DIR)/main.o $(LIB) $(CFLAGS) -o main
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
-
-%.o: %.s
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(SRC_DIR)/*.o main
