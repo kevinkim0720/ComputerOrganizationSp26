@@ -1,0 +1,5 @@
+.global primeTestera
+.text
+
+
+.data
