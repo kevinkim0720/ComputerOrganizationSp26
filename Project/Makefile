@@ -1,9 +1,9 @@
-all: main
+all: main_kevin
 
 CC = gcc
 CFLAGS = -g
 
-SRC_DIR = src
+SRC_DIR = src_kevin
 LIB = $(SRC_DIR)/rsa_lib.o
 
 main: $(SRC_DIR)/main.o $(LIB)
