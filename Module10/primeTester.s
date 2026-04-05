@@ -5,9 +5,13 @@ main:
 	# r4 - divisor for prime test
 	# r5 - divisor^2
 
-	push {lr}
+	SUB sp, sp, #8
+	STR lr, [sp]
+	STR r4, [sp, #4]
+	STR r5, [sp, #8]
 
 	start_loop:
+		# Prompt user if they want program or quit
 		LDR r0, =promptCont
 		BL printf
 
@@ -31,13 +35,15 @@ main:
 
 		LDR r0, =num
 		LDR r0, [r0]
-
+	
+		# Check if input is valid (greater than 2)
 		CMP r0, #3
 		BLT invalid_input
 
 		MOV r4, #2
 
 	prime_loop:
+		# if divisor^2 is greater than n, n is prime
 		MUL r5, r4, r4
 		CMP r5, r0
 		BGT is_prime
@@ -77,12 +83,14 @@ main:
 		B start_loop
 
 	end_program:
-		MOV r0, #0
-		pop {lr}
-		BX lr
+		LDR lr, [sp]
+		LDR r4, [sp, #4]
+		LDR r5, [sp, #8]
+		ADD sp, sp, #8
+		MOV pc, lr
 
 .data
-promptCont: .asciz "\nEnter -1 to end the program, any other key to continue: "
+promptCont: .asciz "\nEnter -1 to end the program, any number to continue: "
 promptNum: .asciz "\nEnter a number to test: "
 
 inputInt: .asciz "%d"
