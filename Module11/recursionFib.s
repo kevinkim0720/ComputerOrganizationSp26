@@ -1,6 +1,9 @@
 .text
 .global main
 main:
+	SUB sp, sp, #4
+	STR lr, [sp]
+
 	# prompt integer for n-th Fib number
         LDR r0, =promptN
         BL printf
@@ -25,7 +28,8 @@ main:
 
         BL printf
 
-        MOV r0, #0
+        LDR lr, [sp]
+	ADD sp, sp, #4
         MOV pc, lr
 
 
