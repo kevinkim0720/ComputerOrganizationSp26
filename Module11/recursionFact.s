@@ -48,6 +48,9 @@ end_program:
 	MOV pc, lr
 
 Factorial:
+	# Program Dictionary:
+	# r4 - copy of n	
+
 	SUB sp, sp, #8
 	STR lr, [sp]
 	STR r4, [sp, #4]

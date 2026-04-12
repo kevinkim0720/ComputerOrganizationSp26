@@ -35,6 +35,10 @@ main:
 
 .text
 Fib:
+	# Program Dictionary:
+	# r4 - copy of n
+	# r5 - fib(n-1)
+
         # Push stack
         SUB sp, sp, #12
         STR lr, [sp]
